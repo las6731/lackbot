@@ -1,9 +1,9 @@
 {
     "slackbot": "Who's this \"Slackbot\" you speak of? :rage:",
     "lackbot": [
-        ":grinning:",
-        ":wave: You rang?",
-        ":sleeping: Oh, sorry, did you say something?"
+        ":angry:",
+        ":middle_finger: Leave me alone!",
+        ":face_with_symbols_over_mouth: Stop summoning me!"
     ],
     "ping": "Pong!"
 }
