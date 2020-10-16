@@ -41,6 +41,8 @@ class LackBotClient(discord.Client):
         # don't respond to ourselves
         if message.author == self.user:
             return
+        elif message.author.id == 82945737305882624: # ian
+            await message.add_reaction(self.find_emoji("fired"))
         
         msg = message.content.lower()
         
