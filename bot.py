@@ -2,6 +2,7 @@ import discord
 import json
 import random
 import os
+import re
 from datetime import datetime
 from pytz import timezone
 
@@ -53,13 +54,24 @@ class LackBotClient(discord.Client):
         for phrase in self.responses:
             if phrase in msg:
                 if isinstance(self.responses[phrase], str):
-                    await message.channel.send(self.responses[phrase])
+                    response = self.replace_emojis(self.responses[phrase])
+                    await message.channel.send(response)
                     return
                 
                 options: list = self.responses[phrase]
                 response = random.randint(0, len(options)-1)
-                await message.channel.send(options[response])
+                response = self.replace_emojis(response)
+                await message.channel.send(response)
                 return
+
+    def replace_emojis(self, string: str):
+        emoji: str
+        for emoji in re.findall(r':[^:\s]*(?:[^:\s]*)*:', string):
+            stripped_emoji = emoji.strip(':')
+            custom_emoji = self.find_emoji(stripped_emoji)
+            if custom_emoji is not None:
+                string = string.replace(emoji, str(custom_emoji))
+        return string
 
 if __name__ == "__main__":
     client = LackBotClient()
