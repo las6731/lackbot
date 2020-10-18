@@ -1,5 +1,12 @@
-version: '3.7'
+version: "3.7"
 services:
     lackbot:
         build: .
         restart: unless-stopped
+        ports:
+            - '5000:5000'
+        volumes:
+            - './responses.json:/app/responses.json'
+        environment:
+            PORT: 5000
+            MAX_WORKERS: 1
