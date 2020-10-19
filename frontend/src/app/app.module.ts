@@ -7,10 +7,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ResponsesComponent } from './responses/responses.component';
+import { ResponseService } from './services/response/response.service';
+import { HttpClientModule } from '@angular/common/http';
+import { LightModeService } from './services/light-mode/light-mode.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ResponsesComponent
   ],
   imports: [
     BrowserModule,
@@ -18,9 +23,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     NgbModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ResponseService,
+    LightModeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,6 +13,9 @@
     Also, <b>do not</b> add anything that is <i>seriously</i> NSFW. If that starts happening, I'll have to implement
     authentication so only server admins can access this.</p>
   <p><i>Please</i> don't make me have to implement authentication.</p>
+</div>
+
+<div class='container mt-5 p-3' [ngClass]="{'bg-dark': !lightMode, 'bg-light': lightMode}">
   <router-outlet></router-outlet>
 </div>
 

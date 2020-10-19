@@ -1,10 +1,19 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from lackbot import bot
 import threading
 
 app = FastAPI()
 lackbot_thread: threading.Thread
 bot_started = False
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
 
 @app.on_event('startup')
 def startup():
@@ -55,4 +64,17 @@ def del_phrase(phrase: str) -> bool:
         del bot.client.responses[phrase]
         bot.client.update_responses()
         return True
+    return False
+
+@app.delete('/api/v1/response/{phrase}/{index}')
+def del_response(phrase: str, index: int) -> bool:
+    phrase = phrase.lower().strip()
+    if phrase in bot.client.responses:
+        phrase_list: list = bot.client.responses[phrase]
+        if len(phrase_list) > index:
+            del phrase_list[index]
+            if len(phrase_list) == 0:
+                del bot.client.responses[phrase]
+            bot.client.update_responses()
+            return True
     return False
