@@ -4,38 +4,7 @@
         <th>Responses</th>
     </thead>
     <tbody>
-        <tr *ngFor='let phrase of responses | keyvalue'>
-            <td>
-                <div class='input-group'>
-                    <input class='form-control' [value]='phrase.key'>
-                    <div class='input-group-prepend'>
-                        <div class='input-group-text'>
-                            <button type='button' class='close' (click)='removePhrase(phrase.key)'><span aria-hidden="true">&times;</span></button>
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td *ngIf='isArray(phrase.value)'>
-                <div *ngFor='let response of phrase.value' class='input-group'>
-                    <input class='form-control' [value]='response'>
-                    <div class='input-group-prepend'>
-                        <div class='input-group-text'>
-                            <button type='button' class='close' (click)='removeResponse(phrase.key, response)'><span aria-hidden="true">&times;</span></button>
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td *ngIf='!isArray(phrase.value)'>
-                <div class='input-group'>
-                    <input class='form-control' [value]='phrase.value'>
-                    <div class='input-group-prepend'>
-                        <div class='input-group-text'>
-                            <button type='button' class='close' (click)='removeResponse(phrase.key, phrase.value)'><span aria-hidden="true">&times;</span></button>
-                        </div>
-                    </div>
-                </div>
-            </td>
-        </tr>
+        <app-phrase *ngFor='let phrase of responses | keyvalue' [phrase]='phrase' (deletePhrase)='removePhrase($event)' (deleteResponse)='removeResponse($event)' (addResponse)='addResponse($event)'></app-phrase>
     </tbody>
 </table>
 <div class='d-flex justify-content-center align-items-center' *ngIf='responses == undefined'>

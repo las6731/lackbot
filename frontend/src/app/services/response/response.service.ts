@@ -21,6 +21,11 @@ export class ResponseService {
       .subscribe(responses => this.$responses.next(responses));
   }
 
+  public postResponse(phrase: string, response: string): void {
+    this.httpClient.post(`${environment.API_URL}/response/${phrase}`, [response])
+      .subscribe(() => this.getResponses());
+  }
+
   public deletePhrase(phrase: string): void {
     this.httpClient.delete<boolean>(`${environment.API_URL}/response/${phrase}`)
       .subscribe(() => this.getResponses());

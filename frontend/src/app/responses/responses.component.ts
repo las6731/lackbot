@@ -18,16 +18,20 @@ export class ResponsesComponent {
     this.responseService.getResponses();
   }
 
-  isArray(obj: any): boolean {
-    return obj instanceof Array;
+  addResponse(event: { phrase: string, response: string }): void {
+    this.responseService.postResponse(event.phrase, event.response);
   }
 
-  removeResponse(phrase: string, response: string): void {
-    if (this.responses[phrase] instanceof Array && this.responses[phrase].length > 1) {
-      const index = this.responses[phrase].indexOf(response);
-      this.responseService.deleteResponse(phrase, index);
+  removeResponse(event: { phrase: string, response: string }): void {
+    console.log(event);
+    if (event.response === undefined) {
+      return;
+    }
+    if (this.responses[event.phrase] instanceof Array && this.responses[event.phrase].length > 1) {
+      const index = this.responses[event.phrase].indexOf(event.response);
+      this.responseService.deleteResponse(event.phrase, index);
     } else {
-      this.responseService.deletePhrase(phrase);
+      this.responseService.deletePhrase(event.phrase);
     }
   }
 

@@ -8,8 +8,8 @@ from pytz import timezone
 import asyncio
 from typing import Optional
 
-from dotenv import load_dotenv
-load_dotenv()
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
 class LackBotClient(discord.Client):
 
