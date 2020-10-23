@@ -1,0 +1,30 @@
+<tr [formGroup]='phraseForm'>
+    <td>
+        <div class='input-group'>
+            <input class='form-control' formControlName='phrase' readonly>
+            <div class='input-group-prepend'>
+                <div class='input-group-text'>
+                    <button type='button' class='close' (click)='deletePhrase.emit(phrase.key)'><span aria-hidden="true">&times;</span></button>
+                </div>
+            </div>
+        </div>
+    </td>
+    <td formArrayName='responses'>
+        <div *ngFor='let response of responses.controls; let i = index' class='d-flex flex-column'>
+            <div class='input-group mb-1'>
+                <textarea class='form-control' style="height: 2.5em;" [formControlName]='i' required></textarea>
+                <div class='input-group-prepend'>
+                    <div class='input-group-text'>
+                        <button type='button' class='close' (click)='removeResponse(i)'><span aria-hidden="true">&times;</span></button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type='button' class='btn btn-success mb-1' (click)='addResponse.emit({phrase: phraseForm.value.phrase, response: response.value})' *ngIf='response.dirty && response.valid && response.value != phrase.value[i]'>Submit</button>
+            </div>
+        </div>
+        <div>
+            <button type='button' class='btn btn-primary' (click)='addResponseControl()'>Add</button>
+        </div>
+    </td>
+</tr>

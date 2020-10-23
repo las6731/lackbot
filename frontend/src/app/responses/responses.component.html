@@ -1,0 +1,34 @@
+<div class='d-flex flex-column align-items-center' *ngIf='responses != undefined'>
+    <h2>Add New Phrase</h2>
+    <div class='d-flex flex-column m-2'>
+        <div class='form-inline' [formGroup]='addPhraseForm'>
+            <div class='input-group mr-3'>
+                <label for='addPhrase-phrase' class='mr-3'>Phrase</label>
+                <input class='form-control' id='addPhrase-phrase' formControlName='phrase' required>
+            </div>
+            <div class='input-group mr-3'>
+                <label for='addPhrase-response' class='mr-3'>Response</label>
+                <textarea class='form-control' style='height: 2.5em;' id='addPhrase-response' formControlName='response' required></textarea>
+            </div>
+            <div>
+                <button type='button' class='btn btn-success mb-1' (click)='addPhrase()' [disabled]='!addPhraseForm.dirty || !addPhraseForm.valid'>Submit</button>
+            </div>
+        </div>
+    </div>
+    <hr class='w-100 m-3' [ngClass]="{'bg-light': !lightMode}">
+    <h2>Existing Phrases</h2>
+    <table class='table' [ngClass]="{'table-dark': !lightMode}">
+        <thead>
+            <th>Phrase</th>
+            <th>Responses</th>
+        </thead>
+        <tbody>
+            <app-phrase *ngFor='let phrase of responses | keyvalue' [phrase]='phrase' (deletePhrase)='removePhrase($event)' (deleteResponse)='removeResponse($event)' (addResponse)='addResponse($event)'></app-phrase>
+        </tbody>
+    </table>
+</div>
+<div class='d-flex justify-content-center align-items-center' *ngIf='responses == undefined'>
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
