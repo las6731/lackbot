@@ -1,7 +1,7 @@
 <tr [formGroup]='phraseForm'>
     <td>
         <div class='input-group'>
-            <input class='form-control' formControlName='phrase'>
+            <input class='form-control' formControlName='phrase' readonly>
             <div class='input-group-prepend'>
                 <div class='input-group-text'>
                     <button type='button' class='close' (click)='deletePhrase.emit(phrase.key)'><span aria-hidden="true">&times;</span></button>

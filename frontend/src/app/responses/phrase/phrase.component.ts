@@ -19,7 +19,6 @@ export class PhraseComponent implements OnInit {
     this.deletePhrase = new EventEmitter();
     this.deleteResponse = new EventEmitter();
     this.addResponse = new EventEmitter();
-    this.deleteResponse.subscribe(() => console.log('Kappa', this.phraseForm.value));
   }
 
   ngOnInit(): void {
